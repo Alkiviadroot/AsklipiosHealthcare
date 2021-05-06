@@ -1,0 +1,171 @@
+{% extends 'base.html' %}
+
+{% block css %}
+<style>
+    html,
+    body {
+        height: 100%;
+    }
+    .block {
+        min-height: 100%;
+    }
+    ol {
+        width: 90%;
+    }
+
+    .pin-top {
+        position: relative;
+    }
+
+    .pin-bottom {
+        position: relative;
+    }
+
+    .pinned {
+        position: fixed !important;
+    }
+    h6{
+        text-transform: uppercase;
+    }
+    h2{
+        margin: 20px;
+    }
+</style>
+{% endblock %}
+
+
+{% block content %}
+
+<h2 class="center-align  light-blue-text text-darken-4">{{asthenia.onoma}}</h2>
+
+<div id="xaraktiristika" class="block">
+    <nav class="pushpin-nav" data-target="xaraktiristika">
+        <div class="nav-wrapper light-blue darken-4">
+            <div class="container">
+                <a href="" class="brand-logo">Χαρακτηριστηκά</a>
+            </div>
+        </div>
+    </nav>
+    <ol>
+        <br>
+        {% for item in xaraktiristika %}
+        <br>
+        <li>
+            {{item.xaraktiristiko}}
+        </li>
+        {% endfor %}
+        <br>
+        <br>
+    </ol>
+</div>
+
+<div id="sxoleio" class="block">
+    <nav class="pushpin-nav" data-target="sxoleio">
+        <div class="nav-wrapper light-blue darken-4">
+            <div class="container">
+                <a href="" class="brand-logo">Σχολείο</a>
+            </div>
+        </div>
+    </nav>
+    <ol>
+        <br>
+        {% for item in sxolio %}
+        <br>
+        <li>
+            {{item.odigia}}
+        </li>
+        {% endfor %}
+        <br>
+        <br>
+    </ol>
+</div>
+
+<div id="ekpedeftikoi" class="block">
+    <nav class="pushpin-nav" data-target="ekpedeftikoi">
+        <div class="nav-wrapper light-blue darken-4">
+            <div class="container">
+                <a href="" class="brand-logo">Εκπεδευτικοί</a>
+            </div>
+        </div>
+    </nav>
+    <ol>
+        <br>
+        {% for item in ekpedeftikoi %}
+        <br>
+        <li>
+            {{item.odigia}}
+        </li>
+        {% endfor %}
+        <br>
+        <br>
+    </ol>
+</div>
+
+<div id="goneis" class="block">
+    <nav class="pushpin-nav" data-target="goneis">
+        <div class="nav-wrapper light-blue darken-4">
+            <div class="container">
+                <a href="" class="brand-logo">Γονείς</a>
+            </div>
+        </div>
+    </nav>
+    <ol>
+        <br>
+        {% for item in goneis %}
+        <br>
+        <li>
+            {{item.odigia}}
+        </li>
+        {% endfor %}
+        <br>
+        <br>
+    </ol>
+</div>
+
+
+
+<footer class="page-footer light-blue darken-4">
+    <div class="container ">
+        <div class="row">
+        <div class="col l6 s12">
+            <h6 class="white-text" ><b>Περισσοτερες Πληροφοριες</b> </h6>
+            <p class="grey-text text-lighten-4">Για περισσότερες πληροφορίες συμβουλευτείτε τους παρακάτω συνδέσμους
+        </p>
+            </div>
+            <div class="col l4 offset-l2 s12">
+                <h5 class="white-text">Σύνδεσμοι</h5>
+                <ul>
+                    {% for item in perisotera %}
+                    <li><a class="grey-text text-lighten-3" href="{{item.link}}" target="_blank">
+                        {{item.link}}
+                    </a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            © 2021 Frederick University
+            <a class="grey-text text-lighten-4 right" href="../" ><i class="tiny material-icons">home</i> Αρχική</a>
+        </div>
+    </div>
+</footer>
+{% endblock %}
+
+{% block javascript %}
+<script>
+    $(document).ready(function () {
+        $('.pushpin').pushpin();
+    });
+
+    $('.pushpin-nav').each(function () {
+        var $this = $(this);
+        var $target = $('#' + $(this).attr('data-target'));
+        $this.pushpin({
+            top: $target.offset().top,
+            bottom: $target.offset().top + $target.outerHeight() - $this.height()
+        });
+    });
+</script>
+{% endblock %}

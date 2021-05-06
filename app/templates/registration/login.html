@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block css %}
+<style>
+    #container,
+    html,
+    body {
+        height: 100%;
+    }
+    @media (min-width : 1025px) {
+        #container{
+            margin-left: 35%;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div id="container" class="container valign-wrapper">
+<form method="post" >
+    {% csrf_token %}
+    <div>{{form}}</div>
+
+    <button type="submit" class="btn light-blue darken-4">Συνδεση<i class="left material-icons">lock_open</i></button>
+    <a href="/" class="btn waves-effect waves-light light-blue darken-4 right">Ακιροση<i class="left material-icons">clear</i></a>
+</form>
+
+</div>
+{% endblock %}

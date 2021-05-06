@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load group %}
+
+{% block css %}
+<style>
+    .collapsible{
+        margin: 0px;
+    }
+    #edit_icon{
+        margin-right: 0px;
+        font-size: 15px;
+    }
+    #edit{
+        margin-top: 10px;
+        margin-left: auto;
+    }
+    @media (min-width : 1025px) {
+        .collapsible{
+            width: 70%;
+            margin:auto;
+        }
+    }
+</style>
+
+
+{% endblock %}
+
+{% block content %}
+
+{% include 'nav.html' %}
+
+<ul class="collapsible" data-collapsible="accordion" >
+
+
+    {% for asthenia in astheniesList%}
+    <li>
+        <div class="collapsible-header">
+            <h5>{{ asthenia.onoma }}</h5>
+            <a id="edit" class="hide btn-small btn-floating waves-effect light-blue darken-4 right" href="edit/{{ asthenia.id }}"><i id="edit_icon" class="material-icons ">edit</i></a>
+        </div>
+        <div class="collapsible-body">
+            <p>{{ asthenia.orismos }}</p>
+            <a class="right waves-effect waves-light btn light-blue darken-4" href="{{ asthenia.id }}"><i
+                    class="material-icons right">arrow_forward</i>Μαθε Περισοτερα</a>
+            <h1></h1>
+        </div>
+    </li>
+    
+    {% endfor %}
+</ul>
+{% endblock %}
+
+{% block javascript %}
+{% if request.user|has_group:"admin" %}
+    <script>
+    document.querySelectorAll('[id=edit]').forEach(element=>{ 
+    element.classList.remove("hide");
+    });
+    </script>
+    {% endif %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
+{% endblock %}

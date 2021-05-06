@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+{% csrf_token %}
+<form method="POST" action="." >
+    {{asthenia.orismos}}
+    <input type="text" name="onoma" value={{asthenia.onoma}}>
+    <input type="text" name="orismos" placeholder= {{asthenia.orismos}}>
+    <input type="submit" value="Save">
+</form>
+{% endblock %}

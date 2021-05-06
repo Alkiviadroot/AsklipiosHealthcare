@@ -1,0 +1,82 @@
+<style>
+
+    nav a {
+        text-transform: uppercase;
+    }
+
+    nav a span , #install{
+        border-radius: 25px;
+        font-weight: bold;
+    }
+
+    nav .sidenav-trigger {
+        margin: 0;
+    }
+    #menu{
+        cursor: pointer;
+    }
+    #user{
+        margin-left: 32px;
+    }
+
+#icon{
+    margin-top: 11px;
+}
+
+</style>
+
+<!-- top nav -->
+<div class="navbar-fixed">
+    <nav class="z-depth-1  light-blue darken-4">
+        <div class="nav-wrapper container">
+            <a href="" class="grey-text text-lighten-4" >Ασκληπιoς<span>Ninja</span></a>
+            <span class="right grey-text text-darken-1">
+                <i class="material-icons sidenav-trigger grey-text text-lighten-4" data-target="side-menu" id="menu">menu</i>
+            </span>
+        </div>
+    </nav>
+</div>
+    
+<!-- side nav -->
+<ul id="side-menu" class="sidenav side-menu">
+    <li><a class="subheader">ΥΠΟΥΡΓΕΙΟ ΠΑΙΔΕΙΑΣ</a></li>
+    <li><a href="/" class="waves-effect">Αρχική<i class="material-icons">home</i></a></li>
+    <div class="divider"></div>
+    {% if user.is_authenticated %}
+    <li id="user">Χρήστης: &nbsp<i id="icon" class="left material-icons light-blue-text text-darken-4">account_circle</i>
+        <b class="light-blue-text text-darken-4">{{user}}</b></li>
+    <li><a href="/logout" class="waves-effect">Αποσύνδεση<i class="material-icons">exit_to_app</i></a></li>
+    {% else %}
+    <li><a href="/login" class="waves-effect">Σύνδεση<i class="material-icons">account_circle</i></a></li>
+    {% endif %}
+    <li><a class="btn waves-effect waves-light light-blue darken-4" href="" id="install">Κατεβαστε<i class="material-icons grey-text text-lighten-4">get_app</i></a></li>
+</ul>
+
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const menus = document.querySelectorAll('.side-menu');
+        M.Sidenav.init(menus, { edge: 'right' });
+    });
+</script>
+<script>
+    const buttonInstall=document.getElementById("install");
+    let deferredPrompt;
+
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    });
+
+
+    buttonInstall.addEventListener('click', async () => {
+    deferredPrompt.prompt();
+    deferredPrompt = null;
+    });
+
+    if (window.matchMedia('(display-mode: standalone)').matches) {  
+    buttonInstall.classList.add("hide");
+    }  
+</script>
