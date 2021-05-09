@@ -1,10 +1,20 @@
 {% extends 'base.html' %}
+{% load group %}
+
 {% block content %}
-{% csrf_token %}
 <form method="POST" action="." >
+    {% csrf_token %}
     {{asthenia.orismos}}
     <input type="text" name="onoma" value={{asthenia.onoma}}>
     <input type="text" name="orismos" placeholder= {{asthenia.orismos}}>
     <input type="submit" value="Save">
 </form>
+{% endblock %}
+
+{% block javascript %}
+    {% if True != request.user|has_group:"admin" %}
+        <script>
+            window.location.replace("../");
+        </script>
+    {% endif %}
 {% endblock %}

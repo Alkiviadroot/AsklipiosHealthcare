@@ -14,6 +14,13 @@
         margin-top: 10px;
         margin-left: auto;
     }
+
+    #add{
+        position: fixed;
+        bottom: 10px;
+        right: 45%;
+    }
+
     @media (min-width : 1025px) {
         .collapsible{
             width: 70%;
@@ -48,6 +55,7 @@
     
     {% endfor %}
 </ul>
+<a id="add" class="hide btn-floating btn waves-effect waves-light light-blue darken-4" href="./add"><i class="material-icons">add</i></a>
 {% endblock %}
 
 {% block javascript %}
@@ -56,6 +64,7 @@
     document.querySelectorAll('[id=edit]').forEach(element=>{ 
     element.classList.remove("hide");
     });
+    document.getElementById('add').classList.remove("hide");
     </script>
     {% endif %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>

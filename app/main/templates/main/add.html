@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load group %}
+
+{% block css %}
+<style>
+    /* label focus color */
+    .input-field input[type=text]:focus + label, .materialize-textarea:focus:not([readonly]) + label {
+        color: #01579b !important;
+        }
+
+    /* label underline focus color */
+        .input-field input[type=text]:focus, .materialize-textarea:focus:not([readonly]) {
+        border-bottom: 1px solid #01579b !important;
+        box-shadow: 0 1px 0 0 #01579b !important;
+        }
+    #container,
+    html,
+    body {
+        height: 90%;
+    }
+
+</style>
+{% endblock %}
+
+
+{% block content %}
+
+{% include 'nav.html' %}
+
+<div id="container" class="container ">
+    <form method="POST" action="." >
+        {% csrf_token %}
+        <div class="input-field">
+            <input type="text" id="onoma" class="validate" name="onoma" required>
+            <label for="onoma">Όνομα Ασθένειας</label>
+        </div>
+        <div class="input-field">
+            <textarea type="text" id="orismos" class="materialize-textarea" name="orismos" required></textarea>
+            <label for="orismos">Ορισμός Ασθένειας</label>
+        </div>
+        <button class="btn waves-effect waves-light light-blue darken-4 right" type="submit" name="action">Προσθεστε
+            <i class="material-icons right">send</i>
+        </button>
+    </form>
+</div>
+
+{% endblock %}
+
+{% block javascript %}
+    {% if True != request.user|has_group:"admin" %}
+        <script>
+            window.location.replace("../");
+        </script>
+    {% endif %}
+{% endblock %}

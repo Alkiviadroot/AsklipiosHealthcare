@@ -1,6 +1,6 @@
 from .models import *
-from django.shortcuts import render, get_object_or_404
-from .forms import AstheniaForm
+from django.shortcuts import redirect, render, get_object_or_404
+from . import forms 
 
 
 # Create your views here.
@@ -30,6 +30,18 @@ def info_view(request, id):
         'perisotera':perisotera,
     }
     return render(request, "main/info.html", context)
+
+def add_content(request):
+    if request.method == 'POST':
+        form = forms.AstheniaForm(request.POST)
+        if form.is_valid():
+            onoma = form.cleaned_data['onoma']
+            orismos = form.cleaned_data['orismos']
+            Asthenia.objects.create(
+                        onoma = onoma,
+                        orismos = orismos,)
+            return redirect('../')
+    return render(request, "main/add.html", {})
 
 def edit_content(request, id):
     asthenia = get_object_or_404(Asthenia, id=id)

@@ -1,9 +1,9 @@
 from django import forms
-from .models import Asthenia,Xaraktiristika
+from . import models
 
 class AstheniaForm(forms.ModelForm):
     class Meta:
-        model = Asthenia
+        model = models.Asthenia
         fields = [
             'onoma',
             'orismos',
