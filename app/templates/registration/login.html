@@ -3,21 +3,12 @@
 
 {% block css %}
 <style>
-    /* label focus color */
-    #id_username input[type=text]:focus + label, .materialize-textarea:focus:not([readonly]) + label {
-        color: #01579b !important;
-        }
-
-    /* label underline focus color */
-    #id_username input[type=text]:focus, .materialize-textarea:focus:not([readonly]) {
-    border-bottom: 1px solid #01579b !important;
-    box-shadow: 0 1px 0 0 #01579b !important;
-    }
     #container,
     html,
     body {
         height: 90%;
     }
+
     @media (min-width : 1025px) {
         #container{
             margin-left: 35%;
@@ -34,9 +25,8 @@
 <form method="post" >
     {% csrf_token %}
     <div>{{form}}</div>
-
     <button type="submit" class="btn light-blue darken-4">Συνδεση<i class="left material-icons">lock_open</i></button>
-    <a href="/" class="btn waves-effect waves-light light-blue darken-4 right">Ακιροση<i class="left material-icons">clear</i></a>
+    <a href="/" class="btn waves-effect waves-light light-blue darken-4 right">Ακυρωση<i class="left material-icons">clear</i></a>
 </form>
 
 </div>
@@ -48,4 +38,12 @@
             window.location.replace("../");
         </script>
     {% endif %}
+        <script>
+            document.querySelectorAll('[for$="id_username"]').forEach(element=>{ 
+            element.innerHTML="Όνομα Χρήστη:";
+            });
+            document.querySelectorAll('[for$="id_password"]').forEach(element=>{ 
+            element.innerHTML="Κωδικός:";
+            });
+        </script>
 {% endblock %}

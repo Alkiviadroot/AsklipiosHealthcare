@@ -18,12 +18,11 @@ from django.urls import path,include
 from main import views
 
 
+
 urlpatterns = [
-    path('', views.title_view, name='home'),
-    path('<int:id>', views.info_view, name='info'),
+
     path('admin/', admin.site.urls),
+    path('',include('main.urls',namespace='main')),
     path('', include('pwa.urls')),
     path('',include('django.contrib.auth.urls')),
-    path('edit/<int:id>', views.edit_content, name='edit'),
-    path('add/', views.add_content, name='add'),
 ]

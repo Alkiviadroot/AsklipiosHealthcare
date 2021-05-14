@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% load group %}
+
+{% block css %}
+<style>
+    textarea{
+        height:auto;
+        min-width:100%;
+        max-width: 100%;
+        resize: none;
+        border-left: 0;
+        border-right: 0;
+    }
+    textarea:focus{
+    outline-offset: 0px #01579b !important;
+    outline: none !important;
+    border: 1px solid #01579b !important;
+    box-shadow: 0 0 3px #01579b !important;
+    -moz-box-shadow: 0 0 3px #01579b !important;
+    -webkit-box-shadow: 0 0 3px #01579b !important;
+
+
+    }
+    [type="checkbox"]:not(:checked), 
+    [type="checkbox"]:checked{
+        opacity: 1;
+        margin-top: 7px;
+        margin-left: -15px;
+
+    }
+
+    hr{
+        height: 3px;
+        background-color: #01579b;
+        border: none;
+    }
+
+</style>
+
+
+{% endblock %}
+{% block content %}
+
+{% include 'nav.html' %}
+
+    <form action="" method="POST" enctype="multipart/form-data">
+
+    {% for hidden_field in form.hidden_fields %}
+        {{ hidden_field.errors }}
+        {{ hidden_field }}
+    {% endfor %}
+
+    {% csrf_token %}
+
+    {{ form.management_form }}
+    {{ form.non_form_errors }}
+    
+    {% block form %}
+    {% endblock %}
+
+    </form>
+{% endblock %}
+
+{% block javascript %}
+    {% if True != request.user|has_group:"admin" %}
+        <script>
+            window.location.replace("../");
+        </script>
+    {% endif %}
+    {% if messages %}
+        {% for message in messages %}
+        <script>
+            M.toast({html: '{{message}}'})
+        </script>
+        {% endfor %}
+    {% endif %}
+    {% block extrajs %}
+    {% endblock %}
+            <script>
+            document.querySelectorAll('[for$="-DELETE"]').forEach(element=>{ 
+            element.innerHTML="Διαγραφή:";
+            element.style['padding-right']='20px';
+            });
+            
+            </script>
+{% endblock %}

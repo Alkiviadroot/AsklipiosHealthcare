@@ -22,11 +22,10 @@
 </style>
 {% endblock %}
 
-
 {% block content %}
 
 {% include 'nav.html' %}
-
+{% if request.user|has_group:"admin" %}
 <div id="container" class="container ">
     <form method="POST" action="." >
         {% csrf_token %}
@@ -38,18 +37,24 @@
             <textarea type="text" id="orismos" class="materialize-textarea" name="orismos" required></textarea>
             <label for="orismos">Ορισμός Ασθένειας</label>
         </div>
-        <button class="btn waves-effect waves-light light-blue darken-4 right" type="submit" name="action">Προσθεστε
-            <i class="material-icons right">send</i>
-        </button>
+        
+            <button class="btn waves-effect waves-light light-blue darken-4 right" type="submit" name="action">Προσθεστε
+                <i class="material-icons right">send</i>
+            </button>
+        
     </form>
 </div>
-
+{% endif %}
 {% endblock %}
-
-{% block javascript %}
+    {% block javascript %}
     {% if True != request.user|has_group:"admin" %}
         <script>
             window.location.replace("../");
         </script>
     {% endif %}
-{% endblock %}
+    {% endblock %}
+
+
+
+
+

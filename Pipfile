@@ -1,0 +1,15 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+gunicorn = ">=20.1.0,<20.2"
+django-materializecss-form = "<1.2,>=1.1.17"
+django-pwa = ">=1.0.10,<1.1"
+Django = ">=3.2,<3.3"
+
+[dev-packages]
+
+[requires]
+python_version = "3.9"

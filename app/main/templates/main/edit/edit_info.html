@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% load group %}
+
+{% block css %}
+<style>
+    textarea{
+        min-height:300px;
+        min-width:100%;
+        max-width: 100%;
+        resize: none;
+        border-left: 0;
+        border-right: 0;
+    }
+    textarea:focus{
+    outline-offset: 0px #01579b !important;
+    outline: none !important;
+    border: 1px solid #01579b !important;
+    box-shadow: 0 0 3px #01579b !important;
+    -moz-box-shadow: 0 0 3px #01579b !important;
+    -webkit-box-shadow: 0 0 3px #01579b !important;
+    }
+    .dropdown-content{
+        min-width: 150px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+
+{% include 'nav.html' %}
+
+<form method="post" action="">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <button type="submit" value="Save" class="btn waves-effect waves-light light-blue darken-4">ΑΠΟΘΗΚΕΥΣΗ</button>
+    <a href="../delete/" class="btn red">ΔΙΑΓΡΑΦΗ</a>
+    <a class='dropdown-trigger btn btn-floating light-blue darken-4' href='#' data-target='dropdown'><i id="edit_icon" class="material-icons ">edit</i></a>
+    <a href="{% url 'main:home'%}" class="light-blue-text text-darken-4">ΑΚΥΡΩΣΗ</a>
+</form>
+
+<ul id='dropdown' class='dropdown-content' >
+    <li><a href="xaraktiristika"  class="light-blue-text text-darken-4">Χαρακτηριστηκά</a></li>
+    <li><a href="sxoleio"  class="light-blue-text text-darken-4">Σχολείο</a></li>
+    <li><a href="ekpedeftikoi"  class="light-blue-text text-darken-4">Εκπεδευτικοί</a></li>
+    <li><a href="goneis"  class="light-blue-text text-darken-4">Γονείς</a></li>
+    <li><a href="sindesmoi"  class="light-blue-text text-darken-4">Σύνδεσμοι</a></li>
+  </ul>
+
+{% endblock %}
+
+{% block javascript %}
+    {% if messages %}
+    {% for message in messages %}
+    <script>
+        M.toast({html: '{{message}}'})
+    </script>
+    {% endfor %}
+    {% endif %}
+    <script>
+        document.querySelectorAll('[for$="id_onoma"]').forEach(element=>{ 
+        element.innerHTML="Όνομα:";
+        });
+        document.querySelectorAll('[for$="id_orismos"]').forEach(element=>{ 
+        element.innerHTML="Ορισμός:";
+        });
+        $('.dropdown-trigger').dropdown();
+    </script>
+{% endblock %}

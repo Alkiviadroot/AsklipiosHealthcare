@@ -1,0 +1,27 @@
+{% extends 'main/edit/edit.html' %}
+
+{% block form %}
+        <h3 class="light-blue-text text-darken-4">Γονείς</h3>
+        {% for item in form.forms %}
+        <hr>
+        {% for hidden_field in item.hidden_fields %}
+            {{hidden_field.errors}}
+        {% endfor %}
+        <table>
+        {{item.as_p}}
+        </table>
+        {% endfor %}
+        <hr>
+        <p>
+        <button type="submit" value="Save" class="btn waves-effect waves-light light-blue darken-4">ΑΠΟΘΗΚΕΥΣΗ</button>
+        <a href="{% url 'main:info' pk=asthenia.id %}" class="light-blue-text text-darken-4">ΑΚΥΡΩΣΗ</a>
+        </p>
+{% endblock %}
+
+{% block extrajs %}
+    <script>
+    document.querySelectorAll('[for$="-odigia"]').forEach(element=>{ 
+    element.innerHTML="Οδηγία";
+    });
+    </script>
+{% endblock %}

@@ -43,7 +43,7 @@
     <li>
         <div class="collapsible-header">
             <h5>{{ asthenia.onoma }}</h5>
-            <a id="edit" class="hide btn-small btn-floating waves-effect light-blue darken-4 right" href="edit/{{ asthenia.id }}"><i id="edit_icon" class="material-icons ">edit</i></a>
+            <a id="edit" class="hide btn-small btn-floating waves-effect light-blue darken-4 right" href="{% url 'main:edit_info' pk=asthenia.id %}"><i id="edit_icon" class="material-icons ">edit</i></a>
         </div>
         <div class="collapsible-body">
             <p>{{ asthenia.orismos }}</p>

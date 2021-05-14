@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% include 'nav.html' %}
+<form method="post" action=".">
+    {% csrf_token %}
+    <h5>Θέλετε να διαγράψετε το <b class="light-blue-text text-darken-4">{{item}}</b>?</h5>
+    <button type="submit" class="btn red">ΔΙΑΓΡΑΦΗ</button>
+    <a href="{% url 'main:edit_info' pk=item.id%}">ΑΚΥΡΩΣΗ</a>
+</form>
+    
+{% endblock %}
