@@ -35,13 +35,27 @@
         border: none;
     }
 
+    #save{
+        position: fixed;
+        bottom: 10px;
+        right: 10px;
+    }
+    @media (max-width : 1024px) {
+            .breadcrumb {
+        font-size: 14px;
+        }
+        .breadcrumb:before {
+            margin: 0px;
+        }
+    }
+    
+    
 </style>
 
 
 {% endblock %}
 {% block content %}
 
-{% include 'nav.html' %}
 
     <form action="" method="POST" enctype="multipart/form-data">
 
@@ -58,6 +72,7 @@
     {% block form %}
     {% endblock %}
 
+    <button id="save" type="submit" class="btn btn-floating waves-effect waves-light  light-blue darken-4  right"><i class="material-icons ">save</i></button>
     </form>
 {% endblock %}
 
@@ -81,6 +96,6 @@
             element.innerHTML="Διαγραφή:";
             element.style['padding-right']='20px';
             });
-            
+            document.getElementsByTagName("HR")[0].classList.add("hide");
             </script>
 {% endblock %}
